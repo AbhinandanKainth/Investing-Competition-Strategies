@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competition Playbook · Strategies from the World's Investing Competitions</title>
+<meta name="description" content="Illustrated articles on the strategies used to win investing competitions: the US Investing Championship, World Cup Trading Championships, virtual stock games, Wharton, CFA Research Challenge and quant tournaments.">
+<script>
+  (function () {
+    var t = localStorage.getItem('cp-theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    var f = localStorage.getItem('cp-font');
+    if (f) document.documentElement.style.fontSize = f + '%';
+  })();
+</script>
+<style>
+  :root {
+    --bg: #f6f7fb; --surface: #ffffff; --surface-2: #f1f3f9; --text: #141b26; --muted: #5a6474;
+    --border: #e1e5ee; --blue: #2f6fed; --green: #12a150; --red: #e5484d; --amber: #d98a00;
+    --purple: #8e4ec6; --teal: #0e9f9a; --pink: #d6409f; --shadow: 0 1px 2px rgba(20,27,38,.04), 0 8px 24px rgba(20,27,38,.06);
+  }
+  [data-theme="dark"] {
+    --bg: #0d1117; --surface: #151b24; --surface-2: #1c2430; --text: #e8edf4; --muted: #9aa5b5;
+    --border: #2a3441; --blue: #6e9bff; --green: #3dd68c; --red: #ff6b6f; --amber: #ffb224;
+    --purple: #b98cf0; --teal: #2fd4cd; --pink: #f17dc4; --shadow: none;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--blue); color: #fff; padding: .5rem 1rem; z-index: 100; }
+  .skip:focus { left: 1rem; }
+
+  /* Header */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--blue), var(--purple)); z-index: 60; }
+  header.top { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(160%) blur(10px); -webkit-backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--border); }
+  .bar { max-width: 1160px; margin: 0 auto; padding: .6rem 1.25rem; display: flex; align-items: center; gap: 1rem; }
+  .brand { font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .brand span { color: var(--blue); }
+  .tools { margin-left: auto; display: flex; gap: .4rem; }
+  .tools button { font: inherit; font-size: .9rem; min-width: 2.75rem; min-height: 2.75rem; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); cursor: pointer; }
+  .tools button:hover { border-color: var(--blue); }
+  nav.toc { max-width: 1160px; margin: 0 auto; padding: 0 1.25rem .55rem; display: flex; gap: .4rem; overflow-x: auto; scrollbar-width: thin; }
+  nav.toc a { flex: none; font-size: .85rem; text-decoration: none; color: var(--muted); padding: .3rem .75rem; border-radius: 999px; border: 1px solid transparent; }
+  nav.toc a:hover { color: var(--text); border-color: var(--border); }
+  nav.toc a.active { color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
+
+  main { max-width: 1160px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  .hero { padding: clamp(2.5rem, 7vw, 5rem) 0 2rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 700; color: var(--blue); }
+  h1 { font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.1; letter-spacing: -.03em; margin: .5rem 0 1rem; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, var(--blue), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lede { font-size: 1.15rem; color: var(--muted); max-width: 38rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+  .chip { font-size: .85rem; padding: .35rem .8rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
+  .hero-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.25rem; box-shadow: var(--shadow); }
+
+  h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -.02em; line-height: 1.2; margin: 0 0 .5rem; }
+  h3 { font-size: 1.2rem; margin: 2rem 0 .4rem; letter-spacing: -.01em; }
+  p { margin: .6rem 0 1rem; }
+  .section-intro { color: var(--muted); max-width: 46rem; }
+
+  .article { --c: var(--blue); position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: clamp(1.25rem, 4vw, 2.75rem); margin: 2.5rem 0; box-shadow: var(--shadow); overflow: hidden; }
+  .article::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--c); }
+  .article-head { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; margin-bottom: .5rem; }
+  .tag { font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c);
+    background: color-mix(in srgb, var(--c) 13%, transparent); padding: .25rem .65rem; border-radius: 999px; }
+  .meta { font-size: .85rem; color: var(--muted); }
+  .article .kicker { font-size: 1.1rem; color: var(--muted); max-width: 48rem; }
+  .prose { max-width: 48rem; }
+
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .75rem; margin: 1.5rem 0; padding: 0; }
+  .glance div { background: var(--surface-2); border-radius: 12px; padding: .8rem 1rem; }
+  .glance dt { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+  .glance dd { margin: .15rem 0 0; font-weight: 600; line-height: 1.4; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+  figure { margin: 1.75rem 0; background: var(--surface-2); border-radius: 14px; padding: 1rem 1rem .75rem; }
+  .chart-wrap { overflow-x: auto; }
+  .chart-wrap svg { display: block; width: 100%; min-width: 540px; height: auto; }
+  .chart-wrap.sm svg { min-width: 0; }
+  figcaption { font-size: .9rem; color: var(--muted); margin-top: .5rem; line-height: 1.5; }
+  figcaption b { color: var(--text); }
+  .legend { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; font-size: .85rem; margin: .25rem 0 .5rem; color: var(--muted); }
+  .legend i { display: inline-block; width: .8rem; height: .8rem; border-radius: 3px; margin-right: .35rem; vertical-align: -1px; }
+
+  .callout { border-left: 4px solid var(--c, var(--blue)); background: color-mix(in srgb, var(--c, var(--blue)) 8%, var(--surface)); padding: 1rem 1.25rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+  .callout strong:first-child { display: block; margin-bottom: .2rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
+  .card { background: var(--surface-2); border-radius: 14px; padding: 1rem 1.15rem; }
+  .card h4 { margin: 0 0 .3rem; font-size: 1rem; }
+  .card p { margin: 0; font-size: .95rem; color: var(--muted); }
+  .num { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--c, var(--blue)); color: #fff; font-size: .8rem; font-weight: 800; margin-bottom: .4rem; }
+  [data-theme="dark"] .num { color: #0d1117; }
+  ul.check { padding-left: 0; list-style: none; }
+  ul.check li { padding-left: 1.6rem; position: relative; margin: .4rem 0; }
+  ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+  ul.cross li::before { content: "✗"; color: var(--red); }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); margin: 1.5rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: .93rem; }
+  th, td { text-align: left; padding: .8rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); background: var(--surface-2); }
+  tr:last-child td { border-bottom: 0; }
+  td a { font-weight: 600; text-decoration: none; }
+  .pill { font-size: .75rem; font-weight: 700; padding: .1rem .5rem; border-radius: 999px; white-space: nowrap; }
+  .pill.real { color: var(--red); background: color-mix(in srgb, var(--red) 12%, transparent); }
+  .pill.virt { color: var(--teal); background: color-mix(in srgb, var(--teal) 14%, transparent); }
+  .pill.judge { color: var(--purple); background: color-mix(in srgb, var(--purple) 14%, transparent); }
+
+  .sim { background: var(--surface-2); border-radius: 14px; padding: 1.25rem; margin: 1.5rem 0; }
+  .sim-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem 1.5rem; margin-bottom: 1rem; }
+  .sim label { display: flex; justify-content: space-between; gap: .5rem; font-weight: 600; font-size: .95rem; }
+  .sim-controls > div { min-width: 0; }
+  .sim output { color: var(--blue); font-variant-numeric: tabular-nums; flex: none; }
+  input[type=range] { width: 100%; margin: .25rem 0 0; accent-color: var(--blue); min-height: 2rem; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; margin-top: 1rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: .75rem 1rem; }
+  .stat .v { font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .stat .k { font-size: .8rem; color: var(--muted); }
+  .btn { font: inherit; font-weight: 600; font-size: .9rem; padding: .55rem 1rem; min-height: 2.75rem; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+  .btn:hover { border-color: var(--blue); color: var(--blue); }
+
+  .pipeline { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; counter-reset: step; }
+  .pipeline div { flex: 1 1 140px; background: var(--surface-2); border-radius: 12px; padding: .75rem .9rem; position: relative; counter-increment: step; }
+  .pipeline div::before { content: "Step " counter(step); display: block; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+  .pipeline b { display: block; }
+  .pipeline small { color: var(--muted); }
+
+  .donut-wrap { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: 1.25rem; align-items: center; }
+  .donut-legend { list-style: none; padding: 0; margin: 0; font-size: .95rem; }
+  .donut-legend li { display: flex; align-items: center; gap: .5rem; padding: .3rem 0; border-bottom: 1px dashed var(--border); }
+  .donut-legend li span:last-child { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .donut-legend i { width: .8rem; height: .8rem; border-radius: 3px; flex: none; }
+
+  dl.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .75rem 1.5rem; }
+  dl.glossary div { border-bottom: 1px solid var(--border); padding-bottom: .6rem; }
+  dl.glossary dt { font-weight: 700; }
+  dl.glossary dd { margin: 0; color: var(--muted); font-size: .95rem; }
+  .disclaimer { font-size: .9rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.25rem; }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 2rem 1rem 3rem; }
+  .to-top { position: fixed; right: 1rem; bottom: 1rem; width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font-size: 1.2rem; display: grid; place-items: center; text-decoration: none; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .to-top.show { opacity: 1; pointer-events: auto; }
+
+  /* SVG helpers */
+  .grid { stroke: var(--border); stroke-width: 1; }
+  .axis { stroke: var(--muted); stroke-width: 1.2; }
+  .lbl { fill: var(--muted); font-size: 13px; }
+  .lbl-strong { fill: var(--text); font-size: 14px; font-weight: 650; }
+  .ann { fill: var(--text); font-size: 13px; }
+  .band { opacity: .12; }
+  .f-blue { fill: var(--blue); } .f-green { fill: var(--green); } .f-red { fill: var(--red); } .f-amber { fill: var(--amber); }
+  .f-purple { fill: var(--purple); } .f-teal { fill: var(--teal); } .f-muted { fill: var(--muted); } .f-text { fill: var(--text); }
+  .s-blue { stroke: var(--blue); } .s-green { stroke: var(--green); } .s-red { stroke: var(--red); } .s-amber { stroke: var(--amber); }
+  .s-purple { stroke: var(--purple); } .s-teal { stroke: var(--teal); } .s-muted { stroke: var(--muted); } .s-text { stroke: var(--text); }
+
+  @media (max-width: 860px) {
+    .hero, .grid-2, .donut-wrap { grid-template-columns: 1fr; }
+    .hero { padding-top: 2rem; }
+  }
+  @media (max-width: 520px) {
+    .sim { padding: 1rem .85rem; }
+    .sim-controls { grid-template-columns: 1fr; }
+  }
+  @media print {
+    header.top, .to-top, #progress, .sim-controls, .btn { display: none !important; }
+    .article { break-inside: avoid-page; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="#top">Competition <span>Playbook</span></a>
+    <div class="tools" role="group" aria-label="Reading settings">
+      <button type="button" id="font-dec" aria-label="Decrease text size">A−</button>
+      <button type="button" id="font-inc" aria-label="Increase text size">A+</button>
+      <button type="button" id="theme" aria-label="Toggle dark mode">◐</button>
+    </div>
+  </div>
+  <nav class="toc" aria-label="Sections">
+    <a href="#overview">Overview</a>
+    <a href="#game-theory">Why risk wins</a>
+    <a href="#usic">US Investing Championship</a>
+    <a href="#world-cup">World Cup Trading</a>
+    <a href="#virtual">Virtual stock games</a>
+    <a href="#wharton">Wharton</a>
+    <a href="#cfa">CFA Research Challenge</a>
+    <a href="#quant">Quant tournaments</a>
+    <a href="#lessons">Lessons</a>
+    <a href="#glossary">Glossary</a>
+  </nav>
+</header>
+
+<main id="content">
+<section class="hero" id="top">
+  <div>
+    <div class="eyebrow">Illustrated guide · 2026 edition</div>
+    <h1>How winners play: <em>strategies from the world's investing competitions</em></h1>
+    <p class="lede">From real-money contests like the <b>US Investing Championship</b> to student challenges judged on research, each competition rewards a different style of play. Here's what wins each one, why it works, and what you can safely use in real life.</p>
+    <div class="chips">
+      <span class="chip">📚 6 competitions</span>
+      <span class="chip">📊 12 visuals</span>
+      <span class="chip">🎲 1 live simulation</span>
+      <span class="chip">⏱ ~25 min read</span>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="legend"><span><i style="background:var(--blue)"></i>US Investing Championship</span><span><i style="background:var(--purple)"></i>World Cup Trading Championships</span></div>
+    <div class="chart-wrap sm"><svg id="chart-winners" role="img" aria-label="Log-scale bar chart of famous winning returns: Larry Williams 11,376% in 1987, Michelle Williams about 1,000% in 1997, Oliver Kell 941% in 2020, Mark Minervini 334.8% in 2021 and 155% in 1997, David Ryan 161%, 160% and 118% in 1985 to 1987."></svg></div>
+    <p class="meta" style="margin:.4rem 0 0">One-year returns of well-known winners, as publicly reported. <b>Log scale</b>: each grid step is roughly 3×.</p>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <h2>The competitions at a glance</h2>
+  <p class="section-intro">The single biggest factor in strategy is <b>how the contest is scored</b>. Pure "highest return wins" contests push players toward risk. Contests judged by experts reward process and reasoning instead.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Competition</th><th>Money</th><th>Who enters</th><th>Length</th><th>How you win</th><th>Winning style</th></tr></thead>
+      <tbody>
+        <tr><td><a href="#usic">US Investing Championship</a></td><td><span class="pill real">Real money</span></td><td>Individual traders and money managers</td><td>Calendar year</td><td>Highest % return in your division</td><td>Concentrated growth and momentum stocks with tight stops</td></tr>
+        <tr><td><a href="#world-cup">World Cup Trading Championships</a></td><td><span class="pill real">Real money</span></td><td>Futures and forex traders</td><td>Calendar year</td><td>Highest net % return</td><td>Leveraged trend and breakout trading</td></tr>
+        <tr><td><a href="#virtual">Virtual stock games</a><br><small>MarketWatch, Investopedia, The Stock Market Game</small></td><td><span class="pill virt">Virtual</span></td><td>Students, classes, the public</td><td>Weeks to a semester</td><td>Highest portfolio value</td><td>High-volatility, concentrated bets</td></tr>
+        <tr><td><a href="#wharton">Wharton Global High School Investment Competition</a></td><td><span class="pill virt">Virtual $100k</span></td><td>High-school teams</td><td>Several months</td><td><span class="pill judge">Judged</span> on strategy and reasoning</td><td>Client-driven, diversified portfolio</td></tr>
+        <tr><td><a href="#cfa">CFA Institute Research Challenge</a></td><td><span class="pill judge">No portfolio</span></td><td>University teams</td><td>Several months</td><td><span class="pill judge">Judged</span> on report and presentation</td><td>Deep fundamental analysis and valuation</td></tr>
+        <tr><td><a href="#quant">Quant tournaments</a><br><small>Numerai, Kaggle finance challenges</small></td><td><span class="pill virt">Stakes / prizes</span></td><td>Data scientists and coders</td><td>Rolling rounds</td><td>Score on unseen (live) data</td><td>Robust models that don't overfit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <div class="chart-wrap"><svg id="chart-map" role="img" aria-label="Strategy map. Horizontal axis: judged on raw returns versus judged on process. Vertical axis: typical risk-taking. Virtual games, World Cup and US Investing Championship sit in the high-risk, returns-judged corner. Quant tournaments are in the middle. Wharton and the CFA Research Challenge sit in the low-risk, process-judged corner."></svg></div>
+    <figcaption><b>The strategy map.</b> When only the final return counts, risk-taking rises. When judges score your reasoning, careful process wins. Positions are a qualitative summary.</figcaption>
+  </figure>
+</section>
+
+<!-- GAME THEORY -->
+<article class="article" id="game-theory" style="--c:var(--pink)">
+  <div class="article-head"><span class="tag">Foundations</span><span class="meta">4 min read · interactive</span></div>
+  <h2>Why "highest return wins" rewards taking more risk</h2>
+  <p class="kicker">Before looking at each contest, it helps to understand one idea: in a winner-takes-all contest, <b>volatility is your friend</b>, even if it makes your <i>typical</i> result worse.</p>
+  <div class="prose">
+    <p>Imagine 100 players. Only the person in first place wins. If you invest sensibly and earn a solid 8%, you will almost never beat the luckiest of the other 99 players. Coming 30th and coming last pay the same: nothing. The smart move becomes swinging for the fences, because you only need to be lucky once.</p>
+    <p>Economists call this a <b>convex payoff</b>. Fund managers chasing year-end rankings face a milder version of it. Use the simulation below to see the effect for yourself. Every player has the same small positive edge; the only thing you control is how volatile your portfolio is.</p>
+  </div>
+
+  <div class="sim" aria-labelledby="sim-title">
+    <h3 id="sim-title" style="margin-top:0">🎲 Try it: the volatility advantage</h3>
+    <div class="sim-controls">
+      <div><label for="mc-vol">Your daily volatility <output id="mc-vol-o">4.0%</output></label><input type="range" id="mc-vol" min="0.5" max="6" step="0.25" value="4"></div>
+      <div><label for="mc-n">Number of players <output id="mc-n-o">100</output></label><input type="range" id="mc-n" min="10" max="500" step="10" value="100"></div>
+      <div><label for="mc-t">Contest length (trading days) <output id="mc-t-o">60</output></label><input type="range" id="mc-t" min="20" max="250" step="10" value="60"></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--green)"></i>Your chance of finishing 1st</span><span><i style="background:var(--red)"></i>Your chance of losing 30% or more</span><span><i style="background:var(--muted)"></i>Fair share (1 ÷ players)</span></div>
+    <div class="chart-wrap"><svg id="chart-mc" role="img" aria-label="Line chart: as your volatility rises, your chance of winning rises far above a fair share, but your chance of a big loss rises too."></svg></div>
+    <div class="stats" aria-live="polite">
+      <div class="stat"><div class="v" id="mc-win" style="color:var(--green)">–</div><div class="k">Chance you finish 1st</div></div>
+      <div class="stat"><div class="v" id="mc-fair">–</div><div class="k">Fair share</div></div>
+      <div class="stat"><div class="v" id="mc-med">–</div><div class="k">Your typical (median) return</div></div>
+      <div class="stat"><div class="v" id="mc-loss" style="color:var(--red)">–</div><div class="k">Chance you lose ≥ 30%</div></div>
+    </div>
+    <p class="meta" style="margin-bottom:0">Simulation: 3,000 contests per setting. Rivals use normal volatility (0.6–1.8% a day). Everyone shares the same small upward drift. Runs entirely in your browser.</p>
+  </div>
+
+  <div class="callout"><strong>The key takeaway</strong>Raising volatility can multiply your chance of winning many times over, while your <i>typical</i> result gets worse (this is called volatility drag). That trade-off explains most behaviour in return-only contests, and it's why copying contest winners with your savings is dangerous.</div>
+</article>
+<!-- USIC -->
+<article class="article" id="usic" style="--c:var(--blue)">
+  <div class="article-head"><span class="tag">Real money · Stocks</span><span class="meta">6 min read</span></div>
+  <h2>US Investing Championship: momentum, leadership and ruthless stops</h2>
+  <p class="kicker">Run by Norm Zadeh since the 1980s, this is the best-known real-money stock-picking contest in the United States. Its winners have shaped a whole school of growth-stock trading.</p>
+
+  <dl class="glance">
+    <div><dt>Format</dt><dd>Real brokerage accounts, ranked by % return</dd></div>
+    <div><dt>Period</dt><dd>One calendar year</dd></div>
+    <div><dt>Divisions</dt><dd>By account size and asset (stocks, options, futures)</dd></div>
+    <div><dt>Famous winners</dt><dd>David Ryan, Mark Minervini, Oliver Kell</dd></div>
+  </dl>
+
+  <div class="prose">
+    <p>Because results come from real accounts, the US Investing Championship (USIC) is a test of both skill and nerve. Winning returns in the stock division are routinely in the triple digits. David Ryan won three years running (161%, 160% and 118% from 1985 to 1987). Mark Minervini won with 155% in 1997 and returned in 2021 to win with 334.8%. In 2020, Oliver Kell posted 941%.</p>
+    <p>Their styles differ in the details but share a common playbook: <b>buy the strongest stocks in the strongest market, at precise entry points, and cut losers fast.</b></p>
+  </div>
+
+  <h3>1. Trade only market leaders (CAN SLIM)</h3>
+  <div class="prose">
+    <p>David Ryan trained under William O'Neil, whose <b>CAN SLIM</b> checklist looks for: strong <b>C</b>urrent quarterly earnings, strong <b>A</b>nnual earnings growth, something <b>N</b>ew (product, management or price high), tight <b>S</b>upply and rising demand, <b>L</b>eaders not laggards, <b>I</b>nstitutional buying, and a healthy <b>M</b>arket direction. The idea is that the biggest winners of every cycle share these traits <i>before</i> they make their big moves.</p>
+  </div>
+
+  <h3>2. Buy only in "Stage 2"</h3>
+  <div class="prose"><p>Stan Weinstein's stage analysis says a stock's life repeats in four phases. Contest winners avoid the slow base (Stage 1) and the decline (Stage 4). They concentrate their money in the strong uptrend: Stage 2.</p></div>
+  <figure>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 700 270" role="img" aria-labelledby="stage-t stage-d">
+        <title id="stage-t">The four stages of a stock</title>
+        <desc id="stage-d">A stock moves sideways in Stage 1, trends up in Stage 2, tops out in Stage 3 and falls in Stage 4. Buying happens at the breakout from Stage 1 into Stage 2.</desc>
+        <rect x="10" y="32" width="170" height="210" class="f-muted band"/>
+        <rect x="180" y="32" width="200" height="210" class="f-green band"/>
+        <rect x="380" y="32" width="140" height="210" class="f-amber band"/>
+        <rect x="520" y="32" width="170" height="210" class="f-red band"/>
+        <text x="95" y="22" class="lbl-strong" text-anchor="middle">Stage 1 · Base</text>
+        <text x="280" y="22" class="lbl-strong f-green" text-anchor="middle">Stage 2 · Advance ✓</text>
+        <text x="450" y="22" class="lbl-strong" text-anchor="middle">Stage 3 · Top</text>
+        <text x="605" y="22" class="lbl-strong f-red" text-anchor="middle">Stage 4 · Decline ✗</text>
+        <polyline fill="none" class="s-muted" stroke-width="2" stroke-dasharray="6 5" points="20,198 100,195 180,190 260,160 340,115 400,85 460,75 520,82 580,110 640,150 690,190"/>
+        <polyline fill="none" class="s-text" stroke-width="2.5" stroke-linejoin="round" points="20,200 35,190 50,205 65,185 80,198 95,188 110,202 125,186 140,196 155,184 170,192 180,182 195,170 210,175 225,150 240,158 255,135 270,140 285,115 300,122 315,100 330,106 345,85 360,90 375,70 390,62 405,78 420,58 435,82 450,60 465,85 480,62 495,88 510,70 520,92 535,105 550,98 565,125 580,118 595,148 610,140 625,170 640,162 655,195 670,188 690,218"/>
+        <circle cx="195" cy="170" r="7" class="f-green"/>
+        <text x="200" y="228" class="ann">↑ Breakout: buy zone starts</text>
+        <text x="20" y="262" class="lbl">━ price    ╌ 30-week moving average</text>
+      </svg>
+    </div>
+    <figcaption><b>Stage analysis.</b> Buy when the price breaks out of a long base and the 30-week average turns up. Sell or avoid once the average rolls over.</figcaption>
+  </figure>
+
+  <h3>3. Precise entries: SEPA and the VCP</h3>
+  <div class="prose">
+    <p>Minervini's <b>SEPA</b> method (Specific Entry Point Analysis) waits for a <b>Volatility Contraction Pattern (VCP)</b>. The stock pulls back several times, and each pullback is shallower than the last, with trading volume drying up. This tells you sellers are running out. The buy point (the "pivot") is the moment price breaks above the top of the final, tightest pullback on a surge in volume.</p>
+  </div>
+  <figure>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 700 300" role="img" aria-labelledby="vcp-t vcp-d">
+        <title id="vcp-t">Volatility Contraction Pattern</title>
+        <desc id="vcp-d">Three pullbacks shrink from 25% to 12% to 6% while volume dries up. Price then breaks above the pivot on heavy volume. A stop-loss sits a few percent below the entry.</desc>
+        <line x1="250" y1="72" x2="640" y2="72" class="s-blue" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="262" y="62" class="lbl-strong f-blue">Pivot = buy point</text>
+        <line x1="495" y1="100" x2="640" y2="100" class="s-red" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="640" y="117" class="lbl f-red" text-anchor="end">Tight stop (e.g. 7–8% max)</text>
+        <polyline fill="none" class="s-text" stroke-width="2.5" stroke-linejoin="round" points="20,210 50,180 80,130 105,90 120,62 140,85 160,110 180,140 195,150 215,125 235,95 250,70 265,85 285,108 300,115 320,95 340,78 350,72 365,82 385,95 400,85 420,73 435,78 450,76 465,79 480,75 495,72 510,52 530,38 555,30 580,22 610,15"/>
+        <text x="195" y="172" class="lbl-strong f-amber" text-anchor="middle">−25%</text>
+        <text x="300" y="137" class="lbl-strong f-amber" text-anchor="middle">−12%</text>
+        <text x="385" y="117" class="lbl-strong f-amber" text-anchor="middle">−6%</text>
+        <text x="460" y="62" class="lbl" text-anchor="middle">tight</text>
+        <circle cx="497" cy="70" r="6" class="f-green"/>
+        <g id="vcp-vol"></g>
+        <text x="250" y="238" class="lbl">Volume dries up as the pullbacks shrink</text>
+        <text x="520" y="256" class="lbl f-green">Volume surge on breakout</text>
+      </svg>
+    </div>
+    <figcaption><b>The VCP.</b> Each pullback is roughly half the previous one. The tight stop means a failed breakout costs little, while a successful one can run for months.</figcaption>
+  </figure>
+
+  <h3>4. Small losses, big winners, and pyramiding</h3>
+  <div class="prose">
+    <p>USIC champions are often right <i>less than half the time</i>. They still win because their average gain is several times their average loss. Typical rules:</p>
+    <ul class="check">
+      <li><b>Cut every loss quickly</b>, often at 5–8% below the buy price, with no exceptions.</li>
+      <li><b>Pyramid into winners</b>: start with a partial position and add only as the trade proves itself.</li>
+      <li><b>Concentrate</b> in a handful of top ideas when the market is healthy. In a one-year contest, a diversified portfolio of 40 stocks rarely wins.</li>
+      <li><b>Go to cash</b> when breakouts start failing. Several champions credit sitting out bad markets as much as picking stocks.</li>
+    </ul>
+    <p>Oliver Kell describes his approach as a "cycle of price action", with named setups such as the <i>wedge pop</i> and <i>EMA crossback</i>. The aim is to buy early in a new uptrend and add as it confirms.</p>
+  </div>
+  <div class="callout"><strong>Watch out</strong>One-year triple-digit returns usually come with big drawdowns, high turnover, short-term tax bills and many small losses. The same concentration that wins a contest can wipe out a year in a bad market.</div>
+</article>
+
+<!-- WORLD CUP -->
+<article class="article" id="world-cup" style="--c:var(--purple)">
+  <div class="article-head"><span class="tag">Real money · Futures</span><span class="meta">5 min read · interactive</span></div>
+  <h2>World Cup Trading Championships: leverage and position sizing</h2>
+  <p class="kicker">The World Cup Championship of Futures Trading is the futures world's most famous real-money contest, and home to the highest return on record.</p>
+
+  <dl class="glance">
+    <div><dt>Format</dt><dd>Real accounts, ranked by net % return</dd></div>
+    <div><dt>Markets</dt><dd>Futures, plus forex divisions</dd></div>
+    <div><dt>Entry</dt><dd>Small accounts (historically about $10,000 for futures)</dd></div>
+    <div><dt>Record</dt><dd>Larry Williams, 1987: 11,376%</dd></div>
+  </dl>
+
+  <div class="prose">
+    <p>In 1987, Larry Williams turned $10,000 into more than $1.1 million, an 11,376% return that still stands as the contest record. Ten years later his teenage daughter, Michelle Williams (later an Oscar-nominated actress), won with a reported return of about 1,000%.</p>
+    <p>Futures let traders control large positions with little cash (this is called <b>leverage</b>). A 2% move in the underlying market can mean a 20% or 40% move in the account. That makes the contest less about <i>what</i> you trade and more about <b>how much you bet on each trade</b>.</p>
+  </div>
+
+  <div class="cards" style="--c:var(--purple)">
+    <div class="card"><span class="num">1</span><h4>Volatility breakouts</h4><p>Buy when price moves more than a set share of the previous day's range. Williams popularised this short-term approach.</p></div>
+    <div class="card"><span class="num">2</span><h4>Trend following</h4><p>Ride big moves in commodities, bonds or currencies, using wide stops and trailing exits so winners can run.</p></div>
+    <div class="card"><span class="num">3</span><h4>Systematic rules</h4><p>Fully automated strategies remove emotion. Algorithmic traders such as Kevin Davey have placed near the top.</p></div>
+    <div class="card"><span class="num">4</span><h4>Aggressive sizing</h4><p>Risking a large share of the account per trade. This is the real engine of record returns, and of most blow-ups.</p></div>
+  </div>
+
+  <h3>Same edge, three bet sizes</h3>
+  <div class="prose"><p>Below, three traders take <b>exactly the same 120 trades</b>. Each trade wins 45% of the time, and a win pays twice what a loss costs, so all three have a real edge. The only difference is how much of the account they risk per trade. Press reshuffle to see a new sequence of wins and losses.</p></div>
+  <figure>
+    <div class="legend" id="sizing-legend"></div>
+    <div class="chart-wrap"><svg id="chart-sizing" role="img" aria-label="Account value over 120 trades for three bet sizes. Small bets grow slowly and steadily. Medium bets grow fastest over time. Very large bets swing wildly and usually collapse."></svg></div>
+    <p style="margin:.5rem 0 0"><button class="btn" id="sizing-shuffle" type="button">🔀 Reshuffle trades</button></p>
+    <figcaption><b>Position sizing beats stock picking.</b> The 17.5% line is the "Kelly" bet, the maximum-growth size for this edge. Betting beyond it adds risk <i>and</i> lowers long-run growth. The 40% trader sometimes leads early, which is why leaderboards can mislead. Log scale; accounts that fall 95% are marked ruined.</figcaption>
+  </figure>
+  <div class="callout"><strong>What leaderboards don't show</strong>Each year, many leveraged entrants lose most of their account. You only hear about the survivors. Even Larry Williams' record year reportedly included severe swings along the way.</div>
+</article>
+<!-- VIRTUAL -->
+<article class="article" id="virtual" style="--c:var(--teal)">
+  <div class="article-head"><span class="tag">Virtual money · Free</span><span class="meta">4 min read</span></div>
+  <h2>Virtual stock games: the "nothing to lose" problem</h2>
+  <p class="kicker">Classroom and online simulators such as MarketWatch's Virtual Stock Exchange, the Investopedia Simulator and SIFMA's The Stock Market Game are many people's first taste of investing. They are great for learning, but they create some odd incentives.</p>
+
+  <dl class="glance">
+    <div><dt>Format</dt><dd>Virtual cash (often $100,000)</dd></div>
+    <div><dt>Players</dt><dd>Students, classes, friends, the public</dd></div>
+    <div><dt>Length</dt><dd>A few weeks to a semester</dd></div>
+    <div><dt>Downside</dt><dd>None, which changes everything</dd></div>
+  </dl>
+
+  <div class="prose">
+    <p>With no real money at risk and only first place counting, the maths from the <a href="#game-theory">simulation above</a> takes over. A sensible portfolio almost never tops a leaderboard of hundreds of players over six weeks. A single wild bet sometimes does.</p>
+  </div>
+
+  <figure>
+    <div class="chart-wrap"><svg id="chart-dist" role="img" aria-label="Two bell curves of final returns. The steady player's curve is narrow around plus 5%. The gambler's curve is very wide around 0%. Only the gambler's curve reaches past the plus 40% level usually needed to win."></svg></div>
+    <figcaption><b>Why gamblers top leaderboards.</b> The steady player (narrow curve) has the better typical result, but almost no chance of reaching the +40% usually needed to win a big game. The gambler (wide curve) loses more often but owns the right-hand tail.</figcaption>
+  </figure>
+
+  <h3>Strategies you'll see in the wild</h3>
+  <div class="cards" style="--c:var(--teal)">
+    <div class="card"><span class="num">1</span><h4>All-in concentration</h4><p>Putting everything into one or two volatile stocks, such as small biotechs before trial results or meme stocks.</p></div>
+    <div class="card"><span class="num">2</span><h4>Leveraged ETFs and options</h4><p>Where allowed, 3× ETFs or short-dated options magnify every move.</p></div>
+    <div class="card"><span class="num">3</span><h4>Event bets</h4><p>Buying just before earnings or news announcements, where a single day can move a stock 20% or more.</p></div>
+    <div class="card"><span class="num">4</span><h4>Leader "covers", chaser gambles</h4><p>Late in the game, the leader cuts risk or copies rivals' holdings to protect the lead. Those behind must take even bigger bets.</p></div>
+  </div>
+
+  <div class="callout" style="--c:var(--teal)"><strong>How to play it well (and actually learn)</strong>Check the rules first: many class games now cap how much you can put in one stock, or add a written report. Set yourself a personal rule, such as no position above 20% and a written reason for every trade, then judge yourself on that process, not just your rank.</div>
+</article>
+
+<!-- WHARTON -->
+<article class="article" id="wharton" style="--c:var(--green)">
+  <div class="article-head"><span class="tag">Virtual $100k · Judged</span><span class="meta">4 min read</span></div>
+  <h2>Wharton Global High School Investment Competition: invest for a client</h2>
+  <p class="kicker">Run by the Wharton School's Global Youth Program, this team contest flips the incentives: judges score the quality of your strategy and reasoning, not just the size of your returns.</p>
+
+  <dl class="glance">
+    <div><dt>Format</dt><dd>Team manages a virtual $100,000 portfolio</dd></div>
+    <div><dt>Players</dt><dd>High-school students worldwide</dd></div>
+    <div><dt>Twist</dt><dd>A case-study "client" with goals and constraints</dd></div>
+    <div><dt>Judged on</dt><dd>Strategy, rationale, teamwork, fit with the client</dd></div>
+  </dl>
+
+  <div class="prose">
+    <p>Teams receive a client profile, for example a family saving for a goal, with a time horizon, risk tolerance and preferences. They build and manage a portfolio and submit reports and a final presentation. A team that earns 40% by buying one volatile stock would score badly, because it ignored the client.</p>
+  </div>
+
+  <h3>The winning process</h3>
+  <div class="pipeline" style="--c:var(--green)">
+    <div><b>Understand the client</b><small>Goals, time horizon, risk, values</small></div>
+    <div><b>Write the plan</b><small>An investment policy statement (IPS)</small></div>
+    <div><b>Set asset allocation</b><small>The split between stocks, bonds and cash</small></div>
+    <div><b>Pick holdings</b><small>A one-paragraph thesis for each</small></div>
+    <div><b>Monitor and rebalance</b><small>Pre-agreed rules, not panic</small></div>
+    <div><b>Explain</b><small>Clear story, honest about mistakes</small></div>
+  </div>
+
+  <figure>
+    <div class="donut-wrap">
+      <div class="chart-wrap sm"><svg id="chart-donut" viewBox="0 0 240 240" role="img" aria-label="Donut chart of an example balanced allocation: 35% US large-cap stocks, 25% bonds, 15% international stocks, 10% small and mid-cap stocks, 10% cash, 5% real estate."></svg></div>
+      <ul class="donut-legend" id="donut-legend"></ul>
+    </div>
+    <figcaption><b>An example allocation</b> for a moderate-risk client with a five-to-ten-year goal. This is illustrative only. The point is that every slice is explained by the client's needs.</figcaption>
+  </figure>
+
+  <ul class="check">
+    <li><b>Allocation first, stock picks second.</b> Judges look for a deliberate mix across asset classes, sectors and regions.</li>
+    <li><b>A clear thesis for every holding</b>: why this company, why now, and what would make you sell.</li>
+    <li><b>Match the client's values</b>, for example ESG (environmental, social and governance) screens, if the profile asks for them.</li>
+    <li><b>Show your work as a team</b>, with clear roles such as sector analysts, a risk manager and a presenter.</li>
+  </ul>
+</article>
+
+<!-- CFA -->
+<article class="article" id="cfa" style="--c:var(--amber)">
+  <div class="article-head"><span class="tag">Research · Judged</span><span class="meta">4 min read</span></div>
+  <h2>CFA Institute Research Challenge and stock pitch contests: win the argument</h2>
+  <p class="kicker">There is no portfolio here at all. University teams research one real listed company, write a professional equity research report, and defend a buy, hold or sell call in front of industry judges.</p>
+
+  <dl class="glance">
+    <div><dt>Format</dt><dd>Research report plus live presentation and Q&amp;A</dd></div>
+    <div><dt>Players</dt><dd>University teams, local to global rounds</dd></div>
+    <div><dt>Subject</dt><dd>One assigned public company</dd></div>
+    <div><dt>Judged on</dt><dd>Analysis, valuation, clarity, defending your view</dd></div>
+  </dl>
+
+  <div class="prose">
+    <p>Here, "strategy" means the strategy of a persuasive, well-supported investment case. Winning teams treat it like professional sell-side research. University stock pitch competitions reward the same skills in a shorter format.</p>
+  </div>
+
+  <h3>What winning teams do</h3>
+  <div class="cards" style="--c:var(--amber)">
+    <div class="card"><span class="num">1</span><h4>Find a variant view</h4><p>State clearly where you disagree with the market consensus and why, backed by evidence.</p></div>
+    <div class="card"><span class="num">2</span><h4>Triangulate valuation</h4><p>Combine a DCF (discounted cash flow) with peer multiples, and show how sensitive your target is to your assumptions.</p></div>
+    <div class="card"><span class="num">3</span><h4>Name the catalysts</h4><p>Explain what will make the market change its mind, and roughly when.</p></div>
+    <div class="card"><span class="num">4</span><h4>Own the risks</h4><p>List the biggest risks, how likely each is, and what would prove you wrong. Judges probe these hardest in Q&amp;A.</p></div>
+  </div>
+
+  <figure>
+    <div class="chart-wrap"><svg id="chart-football" role="img" aria-label="Football field valuation chart for a hypothetical company. Value ranges: 52-week trading range 82 to 118 dollars, trading comparables 95 to 125, analyst targets 96 to 138, precedent deals 105 to 140, DCF 110 to 150. Current price 104 dollars; team target 128 dollars."></svg></div>
+    <figcaption><b>The "football field" chart</b>, a staple of winning reports. Each bar is a value range from a different method. When most ranges sit above today's price, the buy case is convincing. Figures are for a hypothetical company.</figcaption>
+  </figure>
+  <div class="callout" style="--c:var(--amber)"><strong>Pro tip</strong>Lead with your conclusion and three supporting points on page one. Judges read dozens of reports, so make yours easy to follow and every chart easy to read.</div>
+</article>
+<!-- QUANT -->
+<article class="article" id="quant" style="--c:var(--red)">
+  <div class="article-head"><span class="tag">Data science · Live scoring</span><span class="meta">4 min read</span></div>
+  <h2>Quant tournaments: the enemy is overfitting</h2>
+  <p class="kicker">In Numerai and Kaggle finance competitions, you don't pick stocks. You build models that predict market behaviour, and they are scored on data the models have never seen.</p>
+
+  <dl class="glance">
+    <div><dt>Numerai</dt><dd>Predict stock returns from anonymised data; optionally stake crypto (NMR) on your model</dd></div>
+    <div><dt>Kaggle examples</dt><dd>Jane Street Market Prediction, Optiver Realized Volatility, Two Sigma news challenge</dd></div>
+    <div><dt>Scored on</dt><dd>Live or hidden "private" data</dd></div>
+    <div><dt>Players</dt><dd>Data scientists, students, ML hobbyists</dd></div>
+  </dl>
+
+  <div class="prose">
+    <p>Financial data is noisy, and with enough tuning almost any model can look brilliant on past data. Leaderboards on Kaggle often "shake up" when final scores move from the public test set to the hidden one: teams that tuned to the public scoreboard drop, and robust models rise.</p>
+  </div>
+
+  <figure>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 700 290" role="img" aria-labelledby="of-t of-d">
+        <title id="of-t">Overfitting curve</title>
+        <desc id="of-d">As model complexity rises, error on training data keeps falling, but error on unseen data falls and then rises again. The sweet spot is in the middle.</desc>
+        <rect x="60" y="30" width="190" height="210" class="f-muted band"/>
+        <rect x="430" y="30" width="230" height="210" class="f-red band"/>
+        <line x1="60" y1="240" x2="660" y2="240" class="axis"/>
+        <line x1="60" y1="30" x2="60" y2="240" class="axis"/>
+        <text x="155" y="50" class="lbl-strong" text-anchor="middle">Underfit</text>
+        <text x="545" y="50" class="lbl-strong f-red" text-anchor="middle">Overfit</text>
+        <text x="545" y="68" class="lbl" text-anchor="middle">great backtest, fails live</text>
+        <path d="M70,84 C150,178 330,212 650,230" fill="none" class="s-blue" stroke-width="3"/>
+        <path d="M70,70 C170,150 260,168 330,168 C400,168 520,140 650,70" fill="none" class="s-red" stroke-width="3"/>
+        <line x1="330" y1="40" x2="330" y2="240" class="s-green" stroke-width="1.5" stroke-dasharray="5 5"/>
+        <circle cx="330" cy="168" r="6" class="f-green"/>
+        <text x="338" y="152" class="lbl-strong f-green">Sweet spot</text>
+        <text x="640" y="208" class="lbl f-blue" text-anchor="end">Training / public leaderboard error</text>
+        <text x="640" y="170" class="lbl f-red" text-anchor="end">Unseen (live) data error</text>
+        <text x="360" y="266" class="lbl" text-anchor="middle">Model complexity / tuning to the leaderboard →</text>
+        <text x="40" y="135" class="lbl" text-anchor="middle" transform="rotate(-90 40 135)">Error (lower is better)</text>
+      </svg>
+    </div>
+    <figcaption><b>The overfitting trap.</b> Every extra tweak improves your backtest, but past the sweet spot it makes live results worse.</figcaption>
+  </figure>
+
+  <h3>What consistently works</h3>
+  <ul class="check">
+    <li><b>Time-aware validation.</b> Always test on data that comes <i>after</i> the training period, with a gap between them, so future information can't leak into your model.</li>
+    <li><b>Ensembles.</b> Averaging many simple, different models beats one finely tuned model.</li>
+    <li><b>Feature neutralisation.</b> Reduce your model's dependence on any single input so one change in the market doesn't sink it (popular on Numerai).</li>
+    <li><b>Consistency over peaks.</b> A steady positive score across many rounds earns more than a few brilliant ones, especially when you've staked money.</li>
+    <li><b>Be original.</b> Numerai rewards models that add information the crowd's combined model doesn't already have.</li>
+  </ul>
+</article>
+
+<!-- LESSONS -->
+<section class="article" id="lessons" style="--c:var(--blue)">
+  <div class="article-head"><span class="tag">Takeaways</span><span class="meta">3 min read</span></div>
+  <h2>What carries over to real investing, and what doesn't</h2>
+  <div class="grid-2">
+    <div>
+      <h3 style="margin-top:.5rem">✅ Worth borrowing</h3>
+      <ul class="check">
+        <li>Cut losses early and let winners run (USIC)</li>
+        <li>Size each position by risk, not excitement (World Cup)</li>
+        <li>Start from your own goals and time horizon (Wharton)</li>
+        <li>Write down a thesis and what would prove it wrong (CFA)</li>
+        <li>Distrust strategies that only look good on past data (Quant)</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:.5rem">❌ Leave in the game</h3>
+      <ul class="check cross">
+        <li>Maximum-volatility, all-in bets</li>
+        <li>Heavy leverage on money you need</li>
+        <li>Judging success over a few weeks</li>
+        <li>Ignoring taxes, fees and trading costs</li>
+        <li>Copying a winner without seeing the losers</li>
+      </ul>
+    </div>
+  </div>
+
+  <figure>
+    <div class="chart-wrap"><svg id="chart-recovery" role="img" aria-label="Bar chart of the gain needed to recover from a loss: a 10% loss needs 11%, 20% needs 25%, 30% needs 43%, 40% needs 67%, 50% needs 100%, 60% needs 150%, 70% needs 233%, 80% needs 400%."></svg></div>
+    <figcaption><b>The maths of losses.</b> A 50% loss needs a 100% gain just to get back to where you started. This is why every champion in this guide, whatever their style, protects against big losses first.</figcaption>
+  </figure>
+
+  <div class="callout"><strong>Survivorship bias</strong>For every contest winner with a 900% return, many others using the same aggressive style lost heavily, and nobody writes about them. Treat headline returns as proof of what's <i>possible</i>, not what's <i>likely</i>.</div>
+
+  <h3>Which competition suits you?</h3>
+  <div class="cards">
+    <div class="card"><h4>🎓 Student who likes research and writing</h4><p>CFA Institute Research Challenge (university) or Wharton (high school). Great for your CV and costs you nothing.</p></div>
+    <div class="card"><h4>💻 Coder or data-science learner</h4><p>Numerai or Kaggle. Free to enter; staking real crypto on Numerai is optional.</p></div>
+    <div class="card"><h4>📱 Curious beginner</h4><p>A free virtual stock game with friends. Set your own sensible rules and learn the mechanics.</p></div>
+    <div class="card"><h4>📈 Experienced trader</h4><p>Real-money contests like the USIC or World Cup. Expect entry fees, and only use money you can afford to lose.</p></div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary" style="margin-top:3rem">
+  <h2>Jargon buster</h2>
+  <p class="section-intro">Plain-English definitions of the terms used above.</p>
+  <dl class="glossary">
+    <div><dt>Volatility</dt><dd>How much a price swings up and down. Higher volatility means bigger moves either way.</dd></div>
+    <div><dt>Drawdown</dt><dd>The drop from a portfolio's peak to its lowest point before it recovers.</dd></div>
+    <div><dt>Leverage</dt><dd>Using borrowed money or derivatives to control a bigger position than your cash alone allows. It magnifies gains and losses.</dd></div>
+    <div><dt>Stop-loss</dt><dd>A pre-set price at which you sell to limit a loss.</dd></div>
+    <div><dt>Pivot / breakout</dt><dd>The price level that, once crossed, signals a new uptrend may be starting.</dd></div>
+    <div><dt>Pyramiding</dt><dd>Adding to a winning position in steps as it keeps working.</dd></div>
+    <div><dt>Kelly criterion</dt><dd>A formula for the bet size that maximises long-run growth for a given edge. Most pros bet a fraction of it.</dd></div>
+    <div><dt>DCF</dt><dd>Discounted cash flow: valuing a company by estimating its future cash and converting it to today's money.</dd></div>
+    <div><dt>Overfitting</dt><dd>When a model memorises past noise instead of learning real patterns, so it fails on new data.</dd></div>
+    <div><dt>Asset allocation</dt><dd>How you split money between stocks, bonds, cash and other asset types.</dd></div>
+  </dl>
+</section>
+
+<!-- SOURCES -->
+<section id="sources" style="margin-top:3rem">
+  <h2>Sources and further reading</h2>
+  <ul>
+    <li><a href="https://completetradersedge.com/us-investing-championship/" rel="noopener" target="_blank">U.S. Investing Championship winners and results by year</a></li>
+    <li><a href="https://www.turtletrader.com/trader-ryan/" rel="noopener" target="_blank">David Ryan: three-time U.S. Investing Champion</a></li>
+    <li><a href="https://globalyouth.wharton.upenn.edu/competitions/investment-competition/" rel="noopener" target="_blank">Wharton Global High School Investment Competition</a></li>
+    <li><a href="https://www.cfainstitute.org/" rel="noopener" target="_blank">CFA Institute (Research Challenge)</a></li>
+    <li><a href="https://numer.ai/" rel="noopener" target="_blank">Numerai tournament</a> · <a href="https://www.kaggle.com/competitions" rel="noopener" target="_blank">Kaggle competitions</a></li>
+    <li><a href="https://www.stockmarketgame.org/" rel="noopener" target="_blank">SIFMA Foundation: The Stock Market Game</a></li>
+    <li>Books: <i>Market Wizards</i> (Jack Schwager), <i>Trade Like a Stock Market Wizard</i> (Mark Minervini), <i>How to Make Money in Stocks</i> (William O'Neil), <i>Secrets for Profiting in Bull and Bear Markets</i> (Stan Weinstein)</li>
+  </ul>
+  <p class="disclaimer"><b>Important:</b> This page is for education only. It is not financial advice. Returns quoted are as publicly reported and are not guarantees of future results. Strategies built to win contests can lose real money quickly. Talk to a registered financial adviser before investing.</p>
+</section>
+</main>
+<footer>Competition Playbook · Made for learning · Works offline, no tracking</footer>
+<a href="#top" class="to-top" id="to-top" aria-label="Back to top">↑</a>
+
+<script>
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, s, attrs) {
+    var a = Object.assign({ x: x, y: y }, attrs || {});
+    var t = el('text', a, parent);
+    t.textContent = s;
+    return t;
+  }
+  function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function randn(rng) {
+    var u = 0, v = 0;
+    while (u === 0) u = rng();
+    while (v === 0) v = rng();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  function erf(x) {
+    var s = x < 0 ? -1 : 1; x = Math.abs(x);
+    var t = 1 / (1 + 0.3275911 * x);
+    var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+    return s * y;
+  }
+  function Phi(z) { return 0.5 * (1 + erf(z / Math.SQRT2)); }
+  function pct(v, d) { return (v * 100).toFixed(d == null ? 1 : d) + '%'; }
+  function fmtMoney(v) {
+    if (v >= 1e6) return '$' + (v / 1e6).toFixed(v >= 1e7 ? 0 : 1) + 'M';
+    if (v >= 1e3) return '$' + (v / 1e3).toFixed(v >= 1e4 ? 0 : 1) + 'k';
+    return '$' + Math.round(v);
+  }
+
+  /* ---------- Hero: winners (log scale) ---------- */
+  function drawWinners() {
+    var svg = document.getElementById('chart-winners');
+    var data = [
+      { n: 'Larry Williams', y: '1987', v: 11376, l: '11,376%', c: 'f-purple' },
+      { n: 'Michelle Williams', y: '1997', v: 1000, l: '~1,000%', c: 'f-purple' },
+      { n: 'Oliver Kell', y: '2020', v: 941, l: '941%', c: 'f-blue' },
+      { n: 'Mark Minervini', y: '2021', v: 334.8, l: '334.8%', c: 'f-blue' },
+      { n: 'David Ryan', y: '1985', v: 161, l: '161%', c: 'f-blue' },
+      { n: 'David Ryan', y: '1986', v: 160, l: '160%', c: 'f-blue' },
+      { n: 'Mark Minervini', y: '1997', v: 155, l: '155%', c: 'f-blue' },
+      { n: 'David Ryan', y: '1987', v: 118, l: '118%', c: 'f-blue' }
+    ];
+    var W = 520, L = 165, R = 70, T = 8, rowH = 32, H = T + data.length * rowH + 28;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var lo = Math.log10(50), hi = Math.log10(15000);
+    function x(v) { return L + (Math.log10(v) - lo) / (hi - lo) * (W - L - R); }
+    [100, 1000, 10000].forEach(function (t) {
+      el('line', { x1: x(t), x2: x(t), y1: T, y2: H - 24, class: 'grid' }, svg);
+      txt(svg, x(t), H - 8, t.toLocaleString() + '%', { class: 'lbl', 'text-anchor': 'middle' });
+    });
+    data.forEach(function (d, i) {
+      var y = T + i * rowH;
+      var name = txt(svg, L - 10, y + rowH / 2 + 5, '', { class: 'lbl-strong', 'text-anchor': 'end' });
+      name.textContent = d.n + ' ';
+      var ys = el('tspan', { class: 'lbl' }, name); ys.textContent = "'" + d.y.slice(2);
+      var r = el('rect', { x: L, y: y + 6, width: Math.max(2, x(d.v) - L), height: rowH - 12, rx: 4, class: d.c }, svg);
+      el('title', {}, r).textContent = d.n + ', ' + d.y + ': ' + d.l;
+      txt(svg, x(d.v) + 6, y + rowH / 2 + 5, d.l, { class: 'lbl-strong' });
+    });
+  }
+
+  /* ---------- Overview: strategy map ---------- */
+  function drawMap() {
+    var svg = document.getElementById('chart-map');
+    var W = 760, H = 380, L = 70, R = 30, T = 20, B = 60;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var pw = W - L - R, ph = H - T - B;
+    el('rect', { x: L, y: T, width: pw / 2, height: ph / 2, class: 'f-red band' }, svg);
+    el('rect', { x: L + pw / 2, y: T + ph / 2, width: pw / 2, height: ph / 2, class: 'f-green band' }, svg);
+    el('line', { x1: L, y1: T + ph, x2: L + pw, y2: T + ph, class: 'axis' }, svg);
+    el('line', { x1: L, y1: T, x2: L, y2: T + ph, class: 'axis' }, svg);
+    txt(svg, L, H - 22, '← Judged on raw returns', { class: 'lbl' });
+    txt(svg, L + pw, H - 22, 'Judged on process & reasoning →', { class: 'lbl', 'text-anchor': 'end' });
+    txt(svg, 30, T + ph / 2, 'Typical risk-taking →', { class: 'lbl', 'text-anchor': 'middle', transform: 'rotate(-90 30 ' + (T + ph / 2) + ')' });
+    txt(svg, L + 12, T + ph / 2 - 12, 'Swing for the fences', { class: 'lbl f-red' });
+    txt(svg, L + pw - 12, T + ph / 2 + 22, 'Process wins', { class: 'lbl f-green', 'text-anchor': 'end' });
+    var pts = [
+      { n: 'Virtual stock games', x: .07, y: .72, c: 'f-teal', a: 'start', href: '#virtual' },
+      { n: 'World Cup (futures)', x: .17, y: .93, c: 'f-purple', a: 'start', href: '#world-cup' },
+      { n: 'US Investing Championship', x: .27, y: .55, c: 'f-blue', a: 'start', href: '#usic' },
+      { n: 'Quant tournaments', x: .55, y: .38, c: 'f-red', a: 'start', href: '#quant' },
+      { n: 'Wharton', x: .82, y: .26, c: 'f-green', a: 'end', href: '#wharton' },
+      { n: 'CFA Research Challenge', x: .94, y: .1, c: 'f-amber', a: 'end', href: '#cfa' }
+    ];
+    pts.forEach(function (p) {
+      var cx = L + p.x * pw, cy = T + (1 - p.y) * ph;
+      var a = el('a', { href: p.href }, svg);
+      el('circle', { cx: cx, cy: cy, r: 13, class: p.c, opacity: .9 }, a);
+      var dx = p.a === 'start' ? 20 : -20;
+      txt(a, cx + dx, cy + 5, p.n, { class: 'lbl-strong', 'text-anchor': p.a });
+    });
+  }
+
+  /* ---------- Game theory: Monte Carlo ---------- */
+  var MU = 0.0004, M = 3000;
+  var VOLS = []; for (var v = 0.5; v <= 6.0001; v += 0.25) VOLS.push(+(v / 100).toFixed(4));
+  var mcCache = {};
+  function simulate(N, T) {
+    var key = N + '|' + T;
+    if (mcCache[key]) return mcCache[key];
+    var rng = mulberry32(42), maxOpp = new Float64Array(M), sT = Math.sqrt(T);
+    for (var i = 0; i < M; i++) {
+      var best = -Infinity;
+      for (var j = 0; j < N - 1; j++) {
+        var s = 0.006 + rng() * 0.012;
+        var lr = (MU - s * s / 2) * T + s * sT * randn(rng);
+        if (lr > best) best = lr;
+      }
+      maxOpp[i] = best;
+    }
+    var win = VOLS.map(function (s) {
+      var r2 = mulberry32(7), w = 0;
+      for (var i = 0; i < M; i++) {
+        if ((MU - s * s / 2) * T + s * sT * randn(r2) > maxOpp[i]) w++;
+      }
+      return w / M;
+    });
+    var loss = VOLS.map(function (s) {
+      return Phi((Math.log(0.7) - (MU - s * s / 2) * T) / (s * sT));
+    });
+    return (mcCache[key] = { win: win, loss: loss });
+  }
+  function drawMC() {
+    var vol = +document.getElementById('mc-vol').value;
+    var N = +document.getElementById('mc-n').value;
+    var T = +document.getElementById('mc-t').value;
+    document.getElementById('mc-vol-o').textContent = vol.toFixed(2).replace(/0$/, '') + '%';
+    document.getElementById('mc-n-o').textContent = N;
+    document.getElementById('mc-t-o').textContent = T;
+    var r = simulate(N, T), idx = Math.round((vol - 0.5) / 0.25), s = VOLS[idx];
+    var svg = document.getElementById('chart-mc'); clear(svg);
+    var W = 760, H = 320, L = 56, R = 20, Tp = 16, B = 46;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var ymax = Math.min(1, Math.ceil(Math.max(Math.max.apply(null, r.win), Math.max.apply(null, r.loss)) * 10 + 0.0001) / 10);
+    function X(s) { return L + (s - 0.005) / (0.06 - 0.005) * (W - L - R); }
+    function Y(p) { return Tp + (1 - p / ymax) * (H - Tp - B); }
+    for (var g = 0; g <= ymax + 1e-9; g += ymax <= 0.4 ? 0.05 : 0.1) {
+      el('line', { x1: L, x2: W - R, y1: Y(g), y2: Y(g), class: 'grid' }, svg);
+      txt(svg, L - 8, Y(g) + 4, Math.round(g * 100) + '%', { class: 'lbl', 'text-anchor': 'end' });
+    }
+    [1, 2, 3, 4, 5, 6].forEach(function (t) { txt(svg, X(t / 100), H - B + 20, t + '%', { class: 'lbl', 'text-anchor': 'middle' }); });
+    txt(svg, (L + W - R) / 2, H - 6, 'Your daily volatility →', { class: 'lbl', 'text-anchor': 'middle' });
+    var fair = 1 / N;
+    el('line', { x1: L, x2: W - R, y1: Y(fair), y2: Y(fair), class: 's-muted', 'stroke-width': 2, 'stroke-dasharray': '6 5' }, svg);
+    function line(arr, cls) {
+      el('polyline', { points: arr.map(function (p, i) { return X(VOLS[i]) + ',' + Y(p); }).join(' '), fill: 'none', class: cls, 'stroke-width': 3, 'stroke-linejoin': 'round' }, svg);
+    }
+    line(r.loss, 's-red'); line(r.win, 's-green');
+    el('line', { x1: X(s), x2: X(s), y1: Tp, y2: H - B, class: 's-blue', 'stroke-width': 1.5, 'stroke-dasharray': '3 4' }, svg);
+    el('circle', { cx: X(s), cy: Y(r.loss[idx]), r: 6, class: 'f-red' }, svg);
+    el('circle', { cx: X(s), cy: Y(r.win[idx]), r: 6, class: 'f-green' }, svg);
+    var m = (MU - s * s / 2) * T;
+    document.getElementById('mc-win').textContent = pct(r.win[idx]);
+    document.getElementById('mc-fair').textContent = pct(fair);
+    var med = Math.exp(m) - 1;
+    document.getElementById('mc-med').textContent = (med >= 0 ? '+' : '−') + pct(Math.abs(med));
+    document.getElementById('mc-loss').textContent = pct(r.loss[idx]);
+  }
+  var mcTimer;
+  ['mc-vol', 'mc-n', 'mc-t'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      clearTimeout(mcTimer); mcTimer = setTimeout(drawMC, 60);
+    });
+  });
+
+  /* ---------- USIC: VCP volume ---------- */
+  function drawVcpVolume() {
+    var g = document.getElementById('vcp-vol');
+    el('line', { x1: 15, x2: 640, y1: 290, y2: 290, class: 'axis' }, g);
+    for (var x = 20; x <= 610; x += 15) {
+      var h;
+      if (x < 120) h = 28; else if (x < 200) h = 26 - (x - 120) * 0.05;
+      else if (x < 300) h = 20; else if (x < 390) h = 14; else if (x < 490) h = 7;
+      else if (x < 530) h = 44; else h = 16;
+      if (x >= 490 && x < 530) h = x < 505 ? 44 : 34;
+      el('rect', { x: x - 5, y: 290 - h, width: 10, height: h, rx: 2, class: x >= 490 && x < 530 ? 'f-green' : 'f-muted', opacity: x >= 490 && x < 530 ? 0.9 : 0.45 }, g);
+    }
+  }
+
+  /* ---------- World Cup: bet sizing ---------- */
+  var sizingSeed = 72;
+  function drawSizing() {
+    var rng = mulberry32(sizingSeed), n = 120, trades = [];
+    for (var i = 0; i < n; i++) trades.push(rng() < 0.45 ? 2 : -1);
+    var cfg = [
+      { f: 0.02, label: 'Cautious: 2% risk per trade', cls: 's-teal', col: 'var(--teal)' },
+      { f: 0.175, label: 'Kelly: 17.5% risk', cls: 's-blue', col: 'var(--blue)' },
+      { f: 0.40, label: 'Over-bet: 40% risk', cls: 's-red', col: 'var(--red)' }
+    ];
+    var FLOOR = 500;
+    var series = cfg.map(function (o) {
+      var e = 10000, pts = [e], ruined = false;
+      trades.forEach(function (t) {
+        if (ruined) return;
+        e *= 1 + o.f * t;
+        if (e <= FLOOR) { e = FLOOR; ruined = true; }
+        pts.push(e);
+      });
+      return { pts: pts, ruined: ruined, final: e };
+    });
+    var all = [].concat.apply([], series.map(function (s) { return s.pts; }));
+    var lo = Math.log10(FLOOR), hi = Math.max(Math.log10(Math.max.apply(null, all)), 5);
+    var svg = document.getElementById('chart-sizing'); clear(svg);
+    var W = 760, H = 330, L = 64, R = 20, T = 14, B = 40;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    function X(i) { return L + i / n * (W - L - R); }
+    function Y(v) { return T + (1 - (Math.log10(v) - lo) / (hi - lo)) * (H - T - B); }
+    for (var p = Math.ceil(lo); p <= Math.floor(hi); p++) {
+      var v = Math.pow(10, p);
+      el('line', { x1: L, x2: W - R, y1: Y(v), y2: Y(v), class: 'grid' }, svg);
+      txt(svg, L - 8, Y(v) + 4, fmtMoney(v), { class: 'lbl', 'text-anchor': 'end' });
+    }
+    el('line', { x1: L, x2: W - R, y1: Y(10000), y2: Y(10000), class: 's-muted', 'stroke-width': 1.5, 'stroke-dasharray': '4 4' }, svg);
+    txt(svg, W - R, Y(10000) - 6, 'Start: $10k', { class: 'lbl', 'text-anchor': 'end' });
+    [0, 30, 60, 90, 120].forEach(function (t) { txt(svg, X(t), H - B + 20, t, { class: 'lbl', 'text-anchor': 'middle' }); });
+    txt(svg, (L + W - R) / 2, H - 4, 'Trade number →', { class: 'lbl', 'text-anchor': 'middle' });
+    series.forEach(function (s, k) {
+      el('polyline', { points: s.pts.map(function (v, i) { return X(i) + ',' + Y(v); }).join(' '), fill: 'none', class: cfg[k].cls, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }, svg);
+      if (s.ruined) {
+        var li = s.pts.length - 1;
+        txt(svg, X(li) + 6, Y(FLOOR) - 6, '✗ ruined', { class: 'lbl-strong f-red' });
+      }
+    });
+    document.getElementById('sizing-legend').innerHTML = cfg.map(function (c, k) {
+      var s = series[k];
+      return '<span><i style="background:' + c.col + '"></i>' + c.label + ' → <b>' + (s.ruined ? 'ruined' : fmtMoney(s.final)) + '</b></span>';
+    }).join('');
+  }
+  document.getElementById('sizing-shuffle').addEventListener('click', function () {
+    sizingSeed = Math.floor(Math.random() * 1e9); drawSizing();
+  });
+
+  /* ---------- Virtual: distributions ---------- */
+  function drawDist() {
+    var svg = document.getElementById('chart-dist');
+    var W = 760, H = 300, L = 30, R = 20, T = 20, B = 44;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var xmin = -80, xmax = 110, thr = 40;
+    var players = [
+      { n: 'Steady player', mu: 5, sd: 8, cls: 'blue' },
+      { n: 'Gambler', mu: 0, sd: 35, cls: 'red' }
+    ];
+    function pdf(x, mu, sd) { return Math.exp(-0.5 * Math.pow((x - mu) / sd, 2)) / (sd * Math.sqrt(2 * Math.PI)); }
+    var ymax = pdf(5, 5, 8) * 1.08;
+    function X(x) { return L + (x - xmin) / (xmax - xmin) * (W - L - R); }
+    function Y(y) { return T + (1 - y / ymax) * (H - T - B); }
+    el('line', { x1: L, x2: W - R, y1: Y(0), y2: Y(0), class: 'axis' }, svg);
+    [-60, -40, -20, 0, 20, 40, 60, 80, 100].forEach(function (t) { txt(svg, X(t), H - B + 20, (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t) + '%', { class: 'lbl', 'text-anchor': 'middle' }); });
+    txt(svg, (L + W - R) / 2, H - 4, 'Final return at the end of the game', { class: 'lbl', 'text-anchor': 'middle' });
+    players.forEach(function (p) {
+      var tail = 'M' + X(thr) + ',' + Y(0);
+      for (var x = thr; x <= xmax; x += 1) tail += ' L' + X(x) + ',' + Y(pdf(x, p.mu, p.sd));
+      tail += ' L' + X(xmax) + ',' + Y(0) + ' Z';
+      el('path', { d: tail, class: 'f-' + p.cls, opacity: .35 }, svg);
+      var d = '';
+      for (var x2 = xmin; x2 <= xmax; x2 += 1) d += (d ? ' L' : 'M') + X(x2) + ',' + Y(pdf(x2, p.mu, p.sd));
+      el('path', { d: d, fill: 'none', class: 's-' + p.cls, 'stroke-width': 3 }, svg);
+      p.pWin = 1 - Phi((thr - p.mu) / p.sd);
+    });
+    el('line', { x1: X(thr), x2: X(thr), y1: T, y2: Y(0), class: 's-text', 'stroke-width': 1.5, 'stroke-dasharray': '6 5' }, svg);
+    txt(svg, X(thr) + 8, T + 14, 'Needed to win: +40%', { class: 'lbl-strong' });
+    txt(svg, X(5) - 16, Y(pdf(5, 5, 8)) + 18, 'Steady player · P(win) ≈ ' + (players[0].pWin < 0.001 ? '0%' : pct(players[0].pWin)), { class: 'lbl-strong f-blue', 'text-anchor': 'end' });
+    txt(svg, X(62), Y(pdf(62, 0, 35)) - 34, 'Gambler · P(≥ +40%) ≈ ' + pct(players[1].pWin, 0), { class: 'lbl-strong f-red' });
+    txt(svg, X(-62), Y(pdf(-62, 0, 35)) - 16, 'big losses too', { class: 'lbl f-red', 'text-anchor': 'middle' });
+  }
+
+  /* ---------- Wharton: donut ---------- */
+  function drawDonut() {
+    var data = [
+      { n: 'US large-cap stocks', v: 35, c: 'blue' },
+      { n: 'Bonds', v: 25, c: 'teal' },
+      { n: 'International stocks', v: 15, c: 'purple' },
+      { n: 'Small & mid-cap stocks', v: 10, c: 'amber' },
+      { n: 'Cash', v: 10, c: 'muted' },
+      { n: 'Real estate (REITs)', v: 5, c: 'pink' }
+    ];
+    var svg = document.getElementById('chart-donut');
+    var cx = 120, cy = 120, r = 100, ri = 62, a0 = -Math.PI / 2;
+    data.forEach(function (d) {
+      var a1 = a0 + d.v / 100 * Math.PI * 2, large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ['M', cx + r * Math.cos(a0), cy + r * Math.sin(a0), 'A', r, r, 0, large, 1, cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        'L', cx + ri * Math.cos(a1), cy + ri * Math.sin(a1), 'A', ri, ri, 0, large, 0, cx + ri * Math.cos(a0), cy + ri * Math.sin(a0), 'Z'].join(' ');
+      var path = el('path', { d: p, style: 'fill:var(--' + d.c + ');stroke:var(--surface-2);stroke-width:2' }, svg);
+      el('title', {}, path).textContent = d.n + ': ' + d.v + '%';
+      a0 = a1;
+    });
+    txt(svg, cx, cy - 2, '$100k', { class: 'lbl-strong', 'text-anchor': 'middle', style: 'font-size:22px' });
+    txt(svg, cx, cy + 20, 'portfolio', { class: 'lbl', 'text-anchor': 'middle' });
+    document.getElementById('donut-legend').innerHTML = data.map(function (d) {
+      return '<li><i style="background:var(--' + d.c + ')"></i><span>' + d.n + '</span><span>' + d.v + '%</span></li>';
+    }).join('');
+  }
+
+  /* ---------- CFA: football field ---------- */
+  function drawFootball() {
+    var rows = [
+      { n: '52-week trading range', lo: 82, hi: 118 },
+      { n: 'Trading comparables (EV/EBITDA)', lo: 95, hi: 125 },
+      { n: 'Analyst price targets', lo: 96, hi: 138 },
+      { n: 'Precedent transactions', lo: 105, hi: 140 },
+      { n: 'DCF (WACC 8–10%, growth 2–3%)', lo: 110, hi: 150 }
+    ];
+    var svg = document.getElementById('chart-football');
+    var W = 760, L = 250, R = 30, T = 30, rowH = 44, H = T + rows.length * rowH + 40;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var xmin = 70, xmax = 160;
+    function X(v) { return L + (v - xmin) / (xmax - xmin) * (W - L - R); }
+    for (var t = 70; t <= 160; t += 10) {
+      el('line', { x1: X(t), x2: X(t), y1: T - 6, y2: H - 30, class: 'grid' }, svg);
+      txt(svg, X(t), H - 12, '$' + t, { class: 'lbl', 'text-anchor': 'middle' });
+    }
+    rows.forEach(function (r, i) {
+      var y = T + i * rowH;
+      txt(svg, L - 12, y + rowH / 2 + 5, r.n, { class: 'lbl-strong', 'text-anchor': 'end' });
+      el('rect', { x: X(r.lo), y: y + 10, width: X(r.hi) - X(r.lo), height: rowH - 20, rx: 5, class: 'f-amber', opacity: .85 }, svg);
+      txt(svg, X(r.lo) + 8, y + rowH / 2 + 5, '$' + r.lo, { class: 'lbl', style: 'fill:#2a1a00;font-weight:600' });
+      txt(svg, X(r.hi) - 8, y + rowH / 2 + 5, '$' + r.hi, { class: 'lbl', 'text-anchor': 'end', style: 'fill:#2a1a00;font-weight:600' });
+    });
+    [{ v: 104, n: 'Price today $104', c: 'text' }, { v: 128, n: 'Team target $128', c: 'green' }].forEach(function (m) {
+      el('line', { x1: X(m.v), x2: X(m.v), y1: T - 10, y2: H - 30, class: 's-' + m.c, 'stroke-width': 2.5, 'stroke-dasharray': m.c === 'text' ? '6 4' : '' }, svg);
+      txt(svg, X(m.v), T - 14, m.n, { class: 'lbl-strong f-' + m.c, 'text-anchor': 'middle' });
+    });
+  }
+
+  /* ---------- Lessons: recovery ---------- */
+  function drawRecovery() {
+    var losses = [10, 20, 30, 40, 50, 60, 70, 80];
+    var svg = document.getElementById('chart-recovery');
+    var W = 760, H = 320, L = 56, R = 20, T = 28, B = 50;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var ymax = 420;
+    function Y(v) { return T + (1 - v / ymax) * (H - T - B); }
+    var bw = (W - L - R) / losses.length;
+    [0, 100, 200, 300, 400].forEach(function (g) {
+      el('line', { x1: L, x2: W - R, y1: Y(g), y2: Y(g), class: 'grid' }, svg);
+      txt(svg, L - 8, Y(g) + 4, g + '%', { class: 'lbl', 'text-anchor': 'end' });
+    });
+    losses.forEach(function (l, i) {
+      var need = (1 / (1 - l / 100) - 1) * 100, x = L + i * bw + bw * 0.18, w = bw * 0.64;
+      var cls = l >= 50 ? 'f-red' : l >= 30 ? 'f-amber' : 'f-green';
+      el('rect', { x: x, y: Y(need), width: w, height: Y(0) - Y(need), rx: 4, class: cls }, svg);
+      txt(svg, x + w / 2, Y(need) - 7, '+' + Math.round(need) + '%', { class: 'lbl-strong', 'text-anchor': 'middle' });
+      txt(svg, x + w / 2, H - B + 20, '−' + l + '%', { class: 'lbl', 'text-anchor': 'middle' });
+    });
+    txt(svg, (L + W - R) / 2, H - 6, 'Size of loss → gain needed just to break even', { class: 'lbl', 'text-anchor': 'middle' });
+  }
+
+  /* ---------- Page chrome ---------- */
+  var root = document.documentElement;
+  document.getElementById('theme').addEventListener('click', function () {
+    var t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', t); localStorage.setItem('cp-theme', t);
+  });
+  function setFont(d) {
+    var cur = parseFloat(root.style.fontSize) || 100;
+    var next = Math.min(140, Math.max(87.5, cur + d));
+    root.style.fontSize = next + '%'; localStorage.setItem('cp-font', next);
+  }
+  document.getElementById('font-inc').addEventListener('click', function () { setFont(12.5); });
+  document.getElementById('font-dec').addEventListener('click', function () { setFont(-12.5); });
+
+  var bar = document.getElementById('progress'), toTop = document.getElementById('to-top');
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement;
+    var p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+    bar.style.width = (p * 100) + '%';
+    toTop.classList.toggle('show', h.scrollTop > 800);
+  }, { passive: true });
+
+  var links = {};
+  document.querySelectorAll('nav.toc a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && links[e.target.id]) {
+          Object.keys(links).forEach(function (k) { links[k].classList.remove('active'); });
+          links[e.target.id].classList.add('active');
+          var a = links[e.target.id], nav = a.parentNode;
+          nav.scrollLeft = a.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2;
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+
+  drawWinners(); drawMap(); drawVcpVolume(); drawSizing(); drawDist(); drawDonut(); drawFootball(); drawRecovery();
+  setTimeout(drawMC, 0);
+})();
+</script>
+</body>
+</html>
